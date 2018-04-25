@@ -1,0 +1,59 @@
+
+# Whitelist
+# Készítette: AdiihYT
+
+# FIGYELEM! A hivatalos fájl elérhető letöltési linkje: https://github.com/AdiihYT/Whitelist
+# Egyéb alternatíva valószínűleg hamisítvány!
+
+# A kód nyugodtan szerkeszthető, átírható, de kérlek, hogyha nem értessz hozzá akkor ne szerkezd az alábbiakat!
+# Köszönöm a letöltést!
+
+command /wl [<text>] [<offlineplayer>]:
+	permission: whitelist.use
+	permission message: &cBocsi cicus, ezt neked nem. :C
+	trigger:
+		if arg-1 is not set:
+			send "&e/wl on &7Whitelist bekapcsolása."
+			send "&e/wl off &7Whitelist kikapcsolása."
+			send "&e/wlmsg [üzenet] &7Whitelist üzenetének beállítása"
+			send "&e/wl add [játékos] &7Játékos hozzáadása a whitelist-hez."
+			send "&e/wl rem [játékos] &7Játékos elvétele a whitelist-tól."
+		if arg-1 is "on":
+			set {server.whitelist} to true
+			send "&bWhitelist > &7A karabantartói mód bekapcsolva!"
+		if arg-1 is "off":
+			set {server.whitelist} to false
+			send "&bWhitelist > &7A karbantartói mód kikapcsolva!"
+		if arg-1 is "add":
+			if arg-2 is set:
+				execute command "/pex user %arg-2% add whitelist.join"
+				send "&bWhitelist > &e%arg-2% &7hozzáadva a fehérlistához."
+		if arg-1 is "rem" or "remove":
+			if arg-2 is set:
+				execute command "/pex user %arg-2% remove whitelist.join"
+				send "&bWhitelist > &e%arg-2% &7elvéve a fehérlistáról."
+		if arg-1 is "info":
+			send "&bWhitelist > &7Fejlesztő: AdiihYT"
+			send "&bWhitelist > &7Verzió: 0.69 te$$ó zsaljad"
+	
+command /wlmsg [<text>]:
+	permission: wlmsg.set
+	permission message: &cBocs te$$a neked ezt nem sry cica :C
+	trigger:
+		if arg-1 is not set:
+			send "&cEz így nem lesz jó... :C"
+		if arg-1 is set:
+			set {wlmsg} to arg-1
+			send "&bWhitelist > &7Beállítottad a fehérlista üzenetét a következőre:"
+			send "&e%arg-1%"
+		
+on script load:
+	set {wlmsg} to "A fehérlista be van kapcsolva."
+			
+on join:
+	if {server.whitelist} is true:
+		if player has permission "whitelist.join":
+			stop
+		else:
+			kick player due to "&cBocs te$$ most nem tudsz felzsalni a szerverre. :C%nl%%{wlmsg}%"
+			
