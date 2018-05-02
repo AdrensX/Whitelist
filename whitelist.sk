@@ -1,16 +1,14 @@
 
 # Whitelist
-# Készítette: AdiihYT
+# Készítette: Nanji
 
-# FIGYELEM! A hivatalos fájl elérhető letöltési linkje: https://github.com/AdiihYT/Whitelist
-# Egyéb alternatíva valószínűleg hamisítvány!
 
 # A kód nyugodtan szerkeszthető, átírható, de kérlek, hogyha nem értessz hozzá akkor ne szerkezd az alábbiakat!
 # Köszönöm a letöltést!
 
 command /wl [<text>] [<offlineplayer>]:
 	permission: whitelist.use
-	permission message: &cBocsi cicus, ezt neked nem. :C
+	permission message: &diq, kalácsképűű ezt neked nem lehet használni
 	trigger:
 		if arg-1 is not set:
 			send "&e/wl on &7Whitelist bekapcsolása."
@@ -33,12 +31,12 @@ command /wl [<text>] [<offlineplayer>]:
 				execute command "/pex user %arg-2% remove whitelist.join"
 				send "&bWhitelist > &e%arg-2% &7elvéve a fehérlistáról."
 		if arg-1 is "info":
-			send "&bWhitelist > &7Fejlesztő: AdiihYT"
-			send "&bWhitelist > &7Verzió: 0.69 te$$ó zsaljad"
+			send "&bWhitelist > &7Fejlesztő: Nanji"
+			send "&bWhitelist > &7Verzió: MrKuss Ultra version 0.69"
 	
 command /wlmsg [<text>]:
 	permission: wlmsg.set
-	permission message: &cBocs te$$a neked ezt nem sry cica :C
+	permission message: &cdiq ,  kalácsképűűt észlelt a wl  VESZÉLY!
 	trigger:
 		if arg-1 is not set:
 			send "&cEz így nem lesz jó... :C"
@@ -55,5 +53,5 @@ on join:
 		if player has permission "whitelist.join":
 			stop
 		else:
-			kick player due to "&cBocs te$$ most nem tudsz felzsalni a szerverre. :C%nl%%{wlmsg}%"
+			kick player due to "diq , kalácsképűűek nem jöhetnek fel.  :C%nl%%{wlmsg}%"
 			
